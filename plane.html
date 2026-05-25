@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Pixel Plane Shooting Intro</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: transparent; /* Nền trong suốt để khớp với Notion */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px; /* Tăng chiều cao để chứa máy bay và đạn */
+            margin: 0;
+            overflow: hidden;
+            font-family: 'VT323', monospace;
+            position: relative;
+        }
+        
+        .title-wrapper {
+            animation: float 4s ease-in-out infinite; 
+            text-align: center;
+            margin-bottom: 50px; /* Tạo khoảng trống để máy bay bắn */
+        }
+
+        .title {
+            font-size: 32px; 
+            color: #888888; 
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .name {
+            font-size: 80px; 
+            color: #ea580c; /* Màu cam đậm */
+            margin: 0;
+            line-height: 1;
+        }
+
+        /* 1. MÁY BAY PIXEL */
+        .plane {
+            width: 64px;
+            height: 64px;
+            /* Thay thế bằng một hình ảnh máy bay pixel top-down */
+            background-image: url('https://s3.amazonaws.com/gameartpartnersimagehost/wp-content/uploads/2019/06/Animations.gif');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background
