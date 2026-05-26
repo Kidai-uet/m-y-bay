@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Mô Phỏng Máy Bay Bắn Lên</title>
     <style>
-        /* Cấu hình nền trắng toàn màn hình */
+        /* Nền trắng tinh toàn màn hình */
         body {
             margin: 0;
             padding: 0;
@@ -15,100 +15,57 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            font-family: sans-serif;
         }
 
-        /* Khung chứa vùng hoạt hình */
+        /* Khung chứa */
         .game-container {
             width: 800px;
             height: 600px;
             position: relative;
             background-color: #ffffff;
-            overflow: hidden;
         }
 
-        /* Máy bay chiến đấu (Sử dụng ảnh thật) */
+        /* Máy bay được đẩy lên vị trí cao phía trên */
         .player-plane {
             position: absolute;
-            bottom: 30px;
+            top: 150px; /* Vị trí cao lên sát phía trên theo ý bạn */
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 60px;
-            background-image: url('https://icons8.com');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+            width: 65px;
+            height: 65px;
             z-index: 5;
         }
 
-        /* Tia đạn màu đỏ liên tục bắn vút lên */
+        /* Đạn bắn từ máy bay vút lên cạnh trên màn hình */
         .laser-bullet {
             position: absolute;
             width: 4px;
             height: 20px;
             background-color: #ff3b30;
             box-shadow: 0 0 6px #ff3b30;
-            bottom: 90px;
+            top: 130px; /* Xuất phát ngay phía trên đầu máy bay */
             left: 50%;
             transform: translateX(-50%);
-            animation: shootUp 1s linear infinite;
+            animation: shootUp 0.5s linear infinite;
             z-index: 3;
         }
 
         @keyframes shootUp {
-            0% { bottom: 90px; opacity: 1; }
-            90% { opacity: 1; }
-            100% { bottom: 600px; opacity: 0; }
+            0% { top: 130px; opacity: 1; }
+            100% { top: -20px; opacity: 0; }
         }
-
-        /* Khu vực chứa các mục tiêu màu xanh phía trên */
-        .target-zone {
-            position: absolute;
-            top: 60px;
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            z-index: 2;
-        }
-
-        /* Các mục tiêu hình tròn màu xanh */
-        .blue-target {
-            width: 45px;
-            height: 45px;
-            border: 5px solid #007aff;
-            border-radius: 50%;
-            background-color: transparent;
-            box-sizing: border-box;
-            animation: floatAround 4s ease-in-out infinite alternate;
-        }
-
-        /* Hiệu ứng bay lắc lư nhẹ nhàng cho các vòng tròn xanh */
-        @keyframes floatAround {
-            0% { transform: translateX(-20px) scale(1); }
-            100% { transform: translateX(20px) scale(1.1); }
-        }
-
-        /* Làm cho các mục tiêu di chuyển lệch nhịp nhau */
-        .target-zone .blue-target:nth-child(2) { animation-delay: 0.8s; }
-        .target-zone .blue-target:nth-child(3) { animation-delay: 1.5s; }
     </style>
 </head>
 <body>
 
     <div class="game-container">
-        <!-- Các mục tiêu vòng tròn màu xanh phía trên -->
-        <div class="target-zone">
-            <div class="blue-target"></div>
-            <div class="blue-target"></div>
-            <div class="blue-target"></div>
-        </div>
-
-        <!-- Đạn bắn lên -->
+        <!-- Đạn liên tục bắn lên trên -->
         <div class="laser-bullet"></div>
         
-        <!-- Máy bay chiến đấu ở dưới -->
-        <div class="player-plane"></div>
+        <!-- Máy bay chiến đấu màu đen (Dạng SVG không lo bị lỗi ảnh) -->
+        <svg class="player-plane" viewBox="0 0 24 24" fill="#000000">
+            <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z"/>
+        </svg>
     </div>
 
 </body>
