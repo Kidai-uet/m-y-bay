@@ -2,48 +2,80 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Pixel Plane Shooting Intro</title>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
     <style>
+        /* Cấu hình nền trắng tinh toàn màn hình */
         body {
-            background-color: transparent; /* Nền trong suốt để khớp với Notion */
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 250px; /* Tăng chiều cao để chứa máy bay và đạn */
-            margin: 0;
+            height: 100vh;
             overflow: hidden;
-            font-family: 'VT323', monospace;
+        }
+
+        /* Khung chứa vùng hoạt hình */
+        .game-area {
+            width: 600px;
+            height: 500px;
             position: relative;
+            background-color: #ffffff;
+            overflow: hidden;
         }
+
+        /* Thiết kế máy bay tối giản màu đen để nổi bật trên nền trắng */
+        .player-plane {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 46px;
+            height: 40px;
+            background: #000000;
+            /* Cắt hình dạng mô phỏng chiến đấu cơ */
+            clip-path: polygon(50% 0%, 100% 70%, 80% 70%, 80% 100%, 20% 100%, 20% 70%, 0% 70%);
+        }
+
+        /* Hiệu ứng tia đạn liên tục bắn vút lên trên */
+        .bullet {
+            position: absolute;
+            width: 4px;
+            height: 18px;
+            background-color: #ff3b30; /* Đạn màu đỏ để dễ nhìn trên nền trắng */
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: shootUp 0.8s linear infinite;
+        }
+
+        /* Đường đi của đạn từ vị trí máy bay lên cạnh trên màn hình */
+        @keyframes shootUp {
+            0% {
+                bottom: 80px;
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                bottom: 500px;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-area">
+        <!-- Tia đạn bắn lên -->
+        <div class="bullet"></div>
         
-        .title-wrapper {
-            animation: float 4s ease-in-out infinite; 
-            text-align: center;
-            margin-bottom: 50px; /* Tạo khoảng trống để máy bay bắn */
-        }
+        <!-- Máy bay điều khiển -->
+        <div class="player-plane"></div>
+    </div>
 
-        .title {
-            font-size: 32px; 
-            color: #888888; 
-            margin: 0;
-            letter-spacing: 2px;
-        }
-
-        .name {
-            font-size: 80px; 
-            color: #ea580c; /* Màu cam đậm */
-            margin: 0;
-            line-height: 1;
-        }
-
-        /* 1. MÁY BAY PIXEL */
-        .plane {
-            width: 64px;
-            height: 64px;
-            /* Thay thế bằng một hình ảnh máy bay pixel top-down */
-            background-image: url('https://s3.amazonaws.com/gameartpartnersimagehost/wp-content/uploads/2019/06/Animations.gif');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background
+</body>
+</html>
