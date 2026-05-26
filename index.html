@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <style>
-        /* Cấu hình nền trắng tinh toàn màn hình */
+        /* Cấu hình nền trắng toàn màn hình */
         body {
             margin: 0;
             padding: 0;
@@ -15,65 +15,99 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
+            font-family: sans-serif;
         }
 
         /* Khung chứa vùng hoạt hình */
-        .game-area {
-            width: 600px;
-            height: 500px;
+        .game-container {
+            width: 800px;
+            height: 600px;
             position: relative;
             background-color: #ffffff;
             overflow: hidden;
         }
 
-        /* Thiết kế máy bay tối giản màu đen để nổi bật trên nền trắng */
+        /* Máy bay chiến đấu (Sử dụng ảnh thật) */
         .player-plane {
             position: absolute;
-            bottom: 40px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            width: 46px;
-            height: 40px;
-            background: #000000;
-            /* Cắt hình dạng mô phỏng chiến đấu cơ */
-            clip-path: polygon(50% 0%, 100% 70%, 80% 70%, 80% 100%, 20% 100%, 20% 70%, 0% 70%);
+            width: 60px;
+            height: 60px;
+            background-image: url('https://icons8.com');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 5;
         }
 
-        /* Hiệu ứng tia đạn liên tục bắn vút lên trên */
-        .bullet {
+        /* Tia đạn màu đỏ liên tục bắn vút lên */
+        .laser-bullet {
             position: absolute;
             width: 4px;
-            height: 18px;
-            background-color: #ff3b30; /* Đạn màu đỏ để dễ nhìn trên nền trắng */
-            bottom: 80px;
+            height: 20px;
+            background-color: #ff3b30;
+            box-shadow: 0 0 6px #ff3b30;
+            bottom: 90px;
             left: 50%;
             transform: translateX(-50%);
-            animation: shootUp 0.8s linear infinite;
+            animation: shootUp 1s linear infinite;
+            z-index: 3;
         }
 
-        /* Đường đi của đạn từ vị trí máy bay lên cạnh trên màn hình */
         @keyframes shootUp {
-            0% {
-                bottom: 80px;
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                bottom: 500px;
-                opacity: 0;
-            }
+            0% { bottom: 90px; opacity: 1; }
+            90% { opacity: 1; }
+            100% { bottom: 600px; opacity: 0; }
         }
+
+        /* Khu vực chứa các mục tiêu màu xanh phía trên */
+        .target-zone {
+            position: absolute;
+            top: 60px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            z-index: 2;
+        }
+
+        /* Các mục tiêu hình tròn màu xanh */
+        .blue-target {
+            width: 45px;
+            height: 45px;
+            border: 5px solid #007aff;
+            border-radius: 50%;
+            background-color: transparent;
+            box-sizing: border-box;
+            animation: floatAround 4s ease-in-out infinite alternate;
+        }
+
+        /* Hiệu ứng bay lắc lư nhẹ nhàng cho các vòng tròn xanh */
+        @keyframes floatAround {
+            0% { transform: translateX(-20px) scale(1); }
+            100% { transform: translateX(20px) scale(1.1); }
+        }
+
+        /* Làm cho các mục tiêu di chuyển lệch nhịp nhau */
+        .target-zone .blue-target:nth-child(2) { animation-delay: 0.8s; }
+        .target-zone .blue-target:nth-child(3) { animation-delay: 1.5s; }
     </style>
 </head>
 <body>
 
-    <div class="game-area">
-        <!-- Tia đạn bắn lên -->
-        <div class="bullet"></div>
+    <div class="game-container">
+        <!-- Các mục tiêu vòng tròn màu xanh phía trên -->
+        <div class="target-zone">
+            <div class="blue-target"></div>
+            <div class="blue-target"></div>
+            <div class="blue-target"></div>
+        </div>
+
+        <!-- Đạn bắn lên -->
+        <div class="laser-bullet"></div>
         
-        <!-- Máy bay điều khiển -->
+        <!-- Máy bay chiến đấu ở dưới -->
         <div class="player-plane"></div>
     </div>
 
