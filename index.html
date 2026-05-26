@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <style>
-        /* Nền trắng tinh toàn màn hình */
+        /* Cấu hình nền trắng toàn màn hình */
         body {
             margin: 0;
             padding: 0;
@@ -17,7 +17,7 @@
             overflow: hidden;
         }
 
-        /* Khung chứa */
+        /* Khung chứa vùng chạy hoạt hình */
         .game-container {
             width: 800px;
             height: 600px;
@@ -25,48 +25,84 @@
             background-color: #ffffff;
         }
 
-        /* Máy bay được đẩy lên vị trí cao phía trên */
+        /* MÁY BAY TỰ VẼ BẰNG CSS - Đặt ở vị trí cao phía trên */
         .player-plane {
             position: absolute;
-            top: 150px; /* Vị trí cao lên sát phía trên theo ý bạn */
+            top: 150px; /* Độ cao của máy bay */
             left: 50%;
             transform: translateX(-50%);
-            width: 65px;
-            height: 65px;
-            z-index: 5;
+            width: 60px;
+            height: 60px;
+            z-index: 10;
         }
 
-        /* Đạn bắn từ máy bay vút lên cạnh trên màn hình */
+        /* Thân máy bay màu đen */
+        .plane-body {
+            position: absolute;
+            top: 0; left: 24px;
+            width: 12px; height: 60px;
+            background-color: #000000;
+            border-radius: 6px;
+        }
+
+        /* Cánh chính máy bay nằm ngang */
+        .plane-wings {
+            position: absolute;
+            top: 20px; left: 0;
+            width: 60px; height: 12px;
+            background-color: #000000;
+            border-radius: 4px;
+        }
+
+        /* Đuôi máy bay */
+        .plane-tail {
+            position: absolute;
+            bottom: 0; left: 15px;
+            width: 30px; height: 8px;
+            background-color: #000000;
+            border-radius: 2px;
+        }
+
+        /* Đạn laser xuất phát từ đầu máy bay bắn vút lên trên */
         .laser-bullet {
             position: absolute;
             width: 4px;
-            height: 20px;
+            height: 25px;
             background-color: #ff3b30;
-            box-shadow: 0 0 6px #ff3b30;
-            top: 130px; /* Xuất phát ngay phía trên đầu máy bay */
+            top: 120px; /* Vị trí xuất phát của đạn ngay trước mũi máy bay */
             left: 50%;
             transform: translateX(-50%);
-            animation: shootUp 0.5s linear infinite;
-            z-index: 3;
+            animation: shootUp 0.4s linear infinite;
+            z-index: 5;
         }
 
+        /* Đường đạn di chuyển vút lên cạnh trên cùng */
         @keyframes shootUp {
-            0% { top: 130px; opacity: 1; }
-            100% { top: -20px; opacity: 0; }
+            0% {
+                top: 120px;
+                opacity: 1;
+            }
+            100% {
+                top: -30px;
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="game-container">
-        <!-- Đạn liên tục bắn lên trên -->
+        <!-- Vệt đạn đỏ liên tục bắn lên -->
         <div class="laser-bullet"></div>
         
-        <!-- Máy bay chiến đấu màu đen (Dạng SVG không lo bị lỗi ảnh) -->
-        <svg class="player-plane" viewBox="0 0 24 24" fill="#000000">
-            <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z"/>
-        </svg>
+        <!-- Mô hình máy bay dựng bằng các khối hình học CSS -->
+        <div class="player-plane">
+            <div class="plane-wings"></div>
+            <div class="plane-tail"></div>
+            <div class="plane-body"></div>
+        </div>
     </div>
 
 </body>
 </html>
+v
